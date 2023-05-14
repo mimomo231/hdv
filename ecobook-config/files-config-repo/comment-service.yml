@@ -1,0 +1,16 @@
+server:
+  port: 8083
+---
+spring:
+  application:
+    name: comment-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ecobook_comment
+    username: ecobook
+    password: 123456
+---
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

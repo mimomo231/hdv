@@ -1,0 +1,17 @@
+server:
+  port: 8888
+---
+eureka.client:
+  register-with-eureka: false
+  fetch-registry: false
+---
+spring:
+  application:
+    name: config-server
+  profiles:
+    include: native
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: file:ecobook-config/files-config-repo

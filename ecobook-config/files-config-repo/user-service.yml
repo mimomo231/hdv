@@ -1,0 +1,39 @@
+server:
+  port: 8081
+---
+spring:
+  application:
+    name: user-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ecobook_user
+    username: ecobook
+    password: 123456
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 295321844734-hmis15pkuce3g6p0ccd5sk44tqdlrekn.apps.googleusercontent.com
+            clientSecret: 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
+            scope:
+              - email
+              - profile
+          facebook:
+            clientId: 223920873652474
+            clientSecret: ba4eca9728bcff294a66f2ad70e314ef
+            scope:
+              - email
+              - public_profile
+---
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+---
+# App Properties
+ecobook:
+  app:
+    jwtSecret: ecoBokSecretKey
+    jwtExpirationMs: 600000
+    jwtRefreshExpirationMs: 3600000

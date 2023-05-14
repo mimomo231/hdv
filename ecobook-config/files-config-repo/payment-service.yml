@@ -1,0 +1,23 @@
+server:
+  port: 8084
+---
+spring:
+  application:
+    name: payment-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ecobook_payment
+    username: ecobook
+    password: 123456
+---
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+---
+# Paypal Properties
+paypal:
+  mode: sandbox
+  client:
+    app: ATjm-Zl9PbttuhiDMAFU_mE-OqnZodk6pld53o7kh2b2WwK7qIUwEEnIh8uCaNTnmu_iix4gtoLEF1N8
+    secret: EP2ybjh5g-MfBkIedfMbaS035clBUQjhGkdBbF5sKZLRm_pI6RVoG-rFzkhteretorVXTB63mhKmp2y9

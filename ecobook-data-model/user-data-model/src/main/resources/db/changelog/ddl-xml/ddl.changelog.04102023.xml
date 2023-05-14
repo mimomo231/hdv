@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="1681121276994-01" author="duongnt">
+        <createTable tableName="user_account" remarks="Thông tin tài khoản người dùng">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="username" type="VARCHAR(255)" remarks="Tên đăng nhập">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)" remarks="Mật khẩu đăng nhập">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="VARCHAR(255)" remarks="Quyền truy cập">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)" remarks="Tên">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(255)" remarks="Tên họ"/>
+            <column name="address" type="VARCHAR(255)" remarks="Địa chỉ"/>
+            <column name="phone_number" type="VARCHAR(15)" remarks="Số điện thoại"/>
+            <column name="auth_provider" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="DATETIME" defaultValue="NOW()"/>
+            <column name="updated_at" type="DATETIME" defaultValue="NOW()"/>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="updated_by" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1681121276994-02" author="duongnt">
+        <createTable tableName="refresh_token" remarks="Thông tin refresh token">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="INT" remarks="Người dùng nào?">
+                <constraints nullable="false"/>
+            </column>
+            <column name="token" type="VARCHAR(255)" remarks="Token">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiry_date" type="DATETIME" remarks="Ngày hết hạn">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="DATETIME" defaultValue="NOW()"/>
+            <column name="updated_at" type="DATETIME" defaultValue="NOW()"/>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="updated_by" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1681121276994-03" author="duongnt">
+        <addForeignKeyConstraint baseTableName="refresh_token"
+                                 baseColumnNames="user_id"
+                                 constraintName="user_account_refresh_token_id"
+                                 referencedTableName="user_account"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
